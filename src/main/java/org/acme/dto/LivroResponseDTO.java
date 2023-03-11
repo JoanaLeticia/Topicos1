@@ -1,33 +1,38 @@
-package org.acme.model;
+package org.acme.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import java.util.HashMap;
+import java.util.Map;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import org.acme.model.Livro;
 
-@Entity
-@Table(name = "tabela_livro")
-public class Livro extends PanacheEntity {
+public class LivroResponseDTO {
 
-    @Id
-    @Column(name = "codigo")
     private Integer id;
     private String nome;
     private int isbn;
-
-    @Transient
     private String autor;
     private String editora;
     private String idioma;
+    private Map<String, Object> categoria;
 
-    @ManyToOne
-    @JoinColumn(name = "id_categoria")
-    private Categoria categoria;
+    public LivroResponseDTO(Livro livro) {
+        this.id = livro.getId();
+        this.nome = livro.getNome();
+        this.isbn = livro.getIsbn();
+        this.autor = livro.getAutor();
+        this.editora = livro.getEditora();
+        this.idioma = livro.getIdioma();
+        this.categoria = new HashMap<String, Object>();
+        this.categoria.put("nome", livro.getCategoria().getNome());
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -69,19 +74,11 @@ public class Livro extends PanacheEntity {
         this.idioma = idioma;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Categoria getCategoria() {
+    public Map<String, Object> getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(Map<String, Object> categoria) {
         this.categoria = categoria;
     }
 

@@ -20,7 +20,7 @@ import org.acme.repository.CategoriaRepository;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CategoriaResource {
-    
+
     @Inject
     private CategoriaRepository repository;
 
@@ -42,7 +42,7 @@ public class CategoriaResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Categoria update(@PathParam("id") Long id, Categoria categoria){
+    public Categoria update(@PathParam("id") Long id, Categoria categoria) {
 
         Categoria entity = repository.findById(id);
 
@@ -52,14 +52,14 @@ public class CategoriaResource {
     }
 
     @GET
-    @Path("/count") 
+    @Path("/count")
     public long count() {
         return repository.count();
     }
 
     @GET
     @Path("/search/{nome}")
-    public Categoria search(@PathParam("nome") String nome){
-        return repository.findbyNome(nome);
+    public List<Categoria> search(@PathParam("nome") String nome) {
+        return repository.findByNome(nome);
     }
 }
