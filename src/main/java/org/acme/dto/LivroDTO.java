@@ -1,12 +1,21 @@
 package org.acme.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class LivroDTO {
 
+    @NotBlank(message = "Informe o nome do livro!")
     private String nome;
+    @NotNull(message = "Informe o isbn!")
     private int isbn;
+    @NotBlank(message = "Informe o nome do autor!")
     private String autor;
+    @NotBlank(message = "Informe o nome da editora!")
     private String editora;
+    @NotBlank(message = "Informe o idioma do livro!")
     private String idioma;
+    @NotNull(message = "Informe o id da categoria!")
     private Long idCategoria;
 
     public String getNome() {

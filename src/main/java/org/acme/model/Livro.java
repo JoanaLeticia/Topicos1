@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Size;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
@@ -18,6 +19,8 @@ public class Livro extends PanacheEntity {
     @Column(name = "codigo")
     private Integer id;
     private String nome;
+
+    @Size(min = 13, max = 13, message = "O ISBN deve conter 13 dígitos!")
     private int isbn;
 
     @Transient
